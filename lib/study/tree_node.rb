@@ -167,7 +167,11 @@ module Study
 
           # use getter method instead
           if target.public_methods(false).include?(key.to_sym)
-            output_container[key] = convert(target.send(key.to_sym), registered_objects: registered_objects)
+            begin
+              output_container[key] = convert(target.send(key.to_sym), registered_objects: registered_objects)
+            rescue
+              output_container[key] = convert(value, registered_objects: registered_objects)
+            end  
           else
             output_container[key] = convert(value, registered_objects: registered_objects)
           end
