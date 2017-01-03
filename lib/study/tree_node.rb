@@ -112,7 +112,7 @@ module Study
 
         branch_lines = TextHighlight.green([indent_lines, current_branch_line].join(""), plain: plain)
 
-        puts [branch_lines, text].join("")
+        puts [branch_lines, text.force_encoding('UTF-8')].join("")
 
         if current && (no_children || (indent >= max_depth))
           puts TextHighlight.green([indent_lines].join(""), plain: plain)
