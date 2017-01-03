@@ -121,7 +121,7 @@ module Study
     end
 
     def has_children?
-      ["Hash", "Array"].include?(@value.class.name)
+      ["Hash", "Array"].include?(@value.class.name) && @value.size > 0
     end
 
     def self.convert(target, registered_objects: [])
