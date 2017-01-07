@@ -62,6 +62,20 @@ class TreeNodeTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_convert_hash_with_strings_and_symbols
+    actual = Study::TreeNode.convert({'a': 1, b: 2, c: 3})
+    expected = Study::TreeNode.new(
+      type: "Hash", 
+      value: {
+        b: Study::TreeNode.new(type: "Fixnum", value: 2),
+        c: Study::TreeNode.new(type: "Fixnum", value: 3),
+        a: Study::TreeNode.new(type: "Fixnum", value: 1)
+      }
+    )
+
+    assert_equal expected, actual
+  end
+
   def test_convert_array
     actual = Study::TreeNode.convert([1, 2, 3])
     expected = Study::TreeNode.new(

@@ -93,6 +93,14 @@ module Study
       total_size = @value.size
       sorted_keys = @value.keys.sort
 
+      sorted_number_keys = sorted_keys.select { |key| key.is_a?(Numeric) }.sort
+      sorted_symbol_keys = sorted_keys.select { |key| key.is_a?(Symbol) }.sort
+      sorted_string_keys = sorted_keys.select { |key| key.is_a?(String) }.sort
+      remaining_keys = sorted_keys - sorted_number_keys - sorted_symbol_keys - sorted_string_keys
+      remaining_keys = remaining_keys.sort rescue remaining_keys
+
+      sorted_keys = sorted_number_keys + sorted_symbol_keys + sorted_string_keys + remaining_keys
+
       sorted_keys.each_with_index do |key, index|
         value = @value[key]
 
